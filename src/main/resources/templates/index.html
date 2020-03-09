@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast</title>
+</head>
+<body bgcolor="black">
+<font color="white">
+    <h1>Weather Forecast</h1>
+
+    City name:
+    <td th:text="${weather.getName()}"/>
+    <p>
+
+    </p>
+    Temp:
+    <td th:text="${weather.getMain().getTemp()}"/>
+    *C
+    <p>
+        Pressure:
+    <td th:text="${weather.getMain().getPressure()}"/>
+    hPa
+    </p>
+
+    <p>
+        Humidity :
+    <td th:text="${weather.getMain().getHumidity()}"/>
+    %
+    </p>
+
+    <tr th:each="desc : ${weather.getWeather()}">
+
+        Descryption:
+        <td th:text="${desc.getDescription()}"/>
+
+    </tr>
+    <p>
+
+        <img th:src="${icon}"/>
+
+    </p>
+    <form th:action="@{/weather/set-city}" th:object="${city}" method="post">
+        Set city name: <input type="text" th:field="*{city}">
+        <input type="submit" value="OK">
+    </form>
+</font>
+</body>
+</html>
